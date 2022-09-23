@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_20"
+    android:paddingVertical="@dimen/dp_20"
+    android:background="@color/color_white">
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/image_direction"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/color_black"
+        android:singleLine="true" />
+    
+    <ImageView
+        android:id="@+id/image_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:src="@drawable/ic_arrow_right"
+        android:contentDescription="@string/image_right_arrow" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_meal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title"
+        android:layout_marginTop="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        tools:listitem="@layout/item_meal"
+        android:clipToPadding="false"/>
+
+    <TextView
+        android:id="@+id/text_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/nothing_to_show"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/sp_20"
+        android:padding="@dimen/dp_50"
+        android:visibility="invisible"/>
+
+</RelativeLayout>

@@ -1,13 +1,29 @@
 package com.example.themeal.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.themeal.R
+import com.example.themeal.base.BaseActivity
+import com.example.themeal.databinding.ActivityMainBinding
+import com.example.themeal.ui.viewpager.ViewPagerAdapter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+
+    private val listFragmentId = listOf(R.id.item_home, R.id.item_ingredient, R.id.item_favorite)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding.viewPager.adapter = ViewPagerAdapter(this)
+        binding.viewPager.isUserInputEnabled = false
+        addListener()
+    }
+
+    private fun addListener() {
+
+        binding.bottomNavView.setOnItemSelectedListener {
+            binding.viewPager.currentItem = listFragmentId.indexOf(it.itemId)
+            true
+        }
+
+        binding.bottomNavView.setOnItemReselectedListener {}
     }
 }
