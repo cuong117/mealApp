@@ -8,7 +8,8 @@ import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.ItemMealBinding
 import com.example.themeal.util.loadImage
 
-class MealAdapter : BaseAdapter<MealCollapse, ItemMealBinding>(MealCollapse.getDiffUtil()) {
+class MealAdapter :
+    BaseAdapter<MealCollapse, ItemMealBinding, MealAdapter.ViewHolder>(MealCollapse.getDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

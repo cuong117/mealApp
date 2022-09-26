@@ -6,15 +6,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
 import java.util.concurrent.Executors
 
-abstract class BaseAdapter<T, VB: ViewBinding>(
+
+abstract class BaseAdapter<T, VB: ViewBinding, VH: BaseViewHolder<T, VB>>(
     diffCallback: DiffUtil.ItemCallback<T>
-) : ListAdapter<T, BaseViewHolder<T, VB>>(
+) : ListAdapter<T, VH>(
     AsyncDifferConfig.Builder(diffCallback)
         .setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
         .build()
 ) {
 
-    override fun onBindViewHolder(holder: BaseViewHolder<T, VB>, position: Int) {
+    override fun onBindViewHolder(holder: VH, position: Int) {
         holder.onBindData(getItem(position))
     }
 }

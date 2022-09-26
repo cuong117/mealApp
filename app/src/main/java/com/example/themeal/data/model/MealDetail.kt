@@ -1,6 +1,5 @@
 package com.example.themeal.data.model
 
-import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 
 data class MealDetail(

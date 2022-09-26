@@ -9,7 +9,7 @@ import com.example.themeal.databinding.ItemCategoryBinding
 import com.example.themeal.util.loadImage
 
 class CategoryAdapter :
-    BaseAdapter<Category, ItemCategoryBinding>(Category.getDiffUtil()) {
+    BaseAdapter<Category, ItemCategoryBinding, CategoryAdapter.ViewHolder>(Category.getDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
