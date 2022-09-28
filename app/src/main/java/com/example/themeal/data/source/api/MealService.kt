@@ -22,7 +22,7 @@ interface MealService {
     suspend fun getCategory(): CategoryResponse
 
     @GET("list.php?i=list")
-    suspend fun getIngredient(): IngredientResponse
+    suspend fun getListIngredient(): IngredientResponse
 
     @GET("filter.php")
     suspend fun filterByIngredient(): FilterResponse

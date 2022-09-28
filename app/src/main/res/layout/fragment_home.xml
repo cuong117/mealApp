@@ -9,12 +9,10 @@
     android:paddingHorizontal="@dimen/dp_20">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+        android:id="@+id/search_ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/bg_circle_corner"
+        android:background="@drawable/bg_circle_horizontal"
         app:queryHint="@string/hint_search_view"
         app:iconifiedByDefault="false"
         app:queryBackground="@android:color/transparent"/>
@@ -24,9 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_15"
-        android:layout_below="@id/search_view"
+        android:layout_below="@id/search_ingredient"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
         tools:listitem="@layout/list_meal"
         tools:itemCount="1"/>
 

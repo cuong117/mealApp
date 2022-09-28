@@ -12,9 +12,13 @@ import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.ListCategoryBinding
 import com.example.themeal.databinding.ListMealBinding
 
-class HomeAdapter : BaseAdapter<HomeItem, ViewBinding>(HomeItem.getDiffUtil()) {
+class HomeAdapter :
+    BaseAdapter<HomeItem, ViewBinding, BaseViewHolder<HomeItem, ViewBinding>>(HomeItem.getDiffUtil()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<HomeItem, ViewBinding> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<HomeItem, ViewBinding> {
         val layoutInflater = LayoutInflater.from(parent.context)
         if (viewType == CATEGORY) {
             return CategoryViewHolder(ListCategoryBinding.inflate(layoutInflater, parent, false))

@@ -12,4 +12,6 @@ class MealRepository(private val mealSource: DataSource.MealDataSource) : Reposi
     override suspend fun getCategories() = getResult { mealSource.getCategories() }
 
     override suspend fun getListMealRecent() = getResult { mealSource.getMealRecent() }
+
+    override suspend fun getListIngredient() = getResult { mealSource.getListIngredient() }
 }

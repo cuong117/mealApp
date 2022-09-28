@@ -35,7 +35,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         getListMealRecent()
     }
 
-    fun getMealByFirstLetter() {
+    private fun getMealByFirstLetter() {
         launchAsync(
             request = { mealRepository.getMealByFirstLetter(currentLetter.toString()) },
             onSuccess = { mealResponse ->
@@ -47,7 +47,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         )
     }
 
-    fun getCategories() {
+    private fun getCategories() {
         launchAsync(
             request = { mealRepository.getCategories() },
             onSuccess = {
@@ -56,7 +56,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         )
     }
 
-    fun getNewMeal() {
+    private fun getNewMeal() {
         launchAsync(
             request = { mealRepository.getMealByFirstLetter(newItem) },
             onSuccess = { mealResponse ->
@@ -65,7 +65,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         )
     }
 
-    fun getListMealRecent() {
+    private fun getListMealRecent() {
         launchAsync(
             request = { mealRepository.getListMealRecent() },
             onSuccess = {

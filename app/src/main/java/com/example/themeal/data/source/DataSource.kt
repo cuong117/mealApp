@@ -1,6 +1,7 @@
 package com.example.themeal.data.source
 
 import com.example.themeal.data.model.CategoryResponse
+import com.example.themeal.data.model.IngredientResponse
 import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.data.model.MealResponse
 
@@ -12,5 +13,7 @@ interface DataSource {
         suspend fun getCategories(): CategoryResponse
 
         suspend fun getMealRecent(): List<MealCollapse>
+
+        suspend fun getListIngredient(): IngredientResponse
     }
 }
