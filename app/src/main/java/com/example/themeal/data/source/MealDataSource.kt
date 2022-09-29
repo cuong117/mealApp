@@ -1,5 +1,6 @@
 package com.example.themeal.data.source
 
+import com.example.themeal.data.model.AreaResponse
 import com.example.themeal.data.model.CategoryResponse
 import com.example.themeal.data.model.IngredientResponse
 import com.example.themeal.data.model.MealCollapse
@@ -14,6 +15,14 @@ class MealDataSource(
 
     override suspend fun getMealByFirstLetter(letter: String): MealResponse {
         return apiService.getMealByFirstLetter(letter)
+    }
+
+    override suspend fun getMealByName(name: String): MealResponse {
+        return apiService.getMealByName(name)
+    }
+
+    override suspend fun getArea(): AreaResponse {
+        return apiService.getArea()
     }
 
     override suspend fun getCategories(): CategoryResponse {

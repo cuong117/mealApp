@@ -26,6 +26,5 @@ class IngredientAdapter :
             binding.imageMeal.loadImage(binding.root.context, data.getThumbnail())
             binding.textTitleIngredient.text = data.name
         }
-
     }
 }

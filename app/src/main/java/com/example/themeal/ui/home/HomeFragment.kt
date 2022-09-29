@@ -1,17 +1,20 @@
 package com.example.themeal.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.example.themeal.R
 import com.example.themeal.base.BaseFragment
 import com.example.themeal.constant.Constant
 import com.example.themeal.data.model.HomeItem
 import com.example.themeal.databinding.FragmentHomeBinding
 import com.example.themeal.ui.home.adapter.HomeAdapter
-import org.koin.android.ext.android.inject
+import com.example.themeal.ui.search.SearchActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private val homeViewModel by inject<HomeViewModel>()
+    private val homeViewModel by viewModel<HomeViewModel>()
     private val homeAdapter by lazy { HomeAdapter() }
     private var myListItem =
         listOf(
@@ -25,7 +28,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerOuter.adapter = homeAdapter
         homeAdapter.submitList(myListItem)
+        binding.searchLayout.textHint.text = getString(R.string.hint_search_view)
         addObserver()
+        addListener()
+    }
+
+    private fun addListener() {
+        binding.searchLayout.searchContainer.setOnClickListener {
+            startActivity(Intent(activity, SearchActivity::class.java))
+        }
     }
 
     private fun addObserver() {

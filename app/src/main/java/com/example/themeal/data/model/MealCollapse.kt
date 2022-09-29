@@ -1,5 +1,6 @@
 package com.example.themeal.data.model
 
+import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -32,7 +33,6 @@ data class MealCollapse(
             override fun areContentsTheSame(oldItem: MealCollapse, newItem: MealCollapse): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

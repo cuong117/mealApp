@@ -12,3 +12,6 @@ class CategoryResponse {
 class FilterResponse {
     val meals: List<MealDetail>? = null
 }
+class AreaResponse {
+    val meals: List<Area>? = null
+}

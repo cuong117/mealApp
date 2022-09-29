@@ -1,5 +1,6 @@
 package com.example.themeal.data.source.api
 
+import com.example.themeal.data.model.AreaResponse
 import com.example.themeal.data.model.CategoryResponse
 import com.example.themeal.data.model.FilterResponse
 import com.example.themeal.data.model.IngredientResponse
@@ -26,4 +27,7 @@ interface MealService {
 
     @GET("filter.php")
     suspend fun filterByIngredient(): FilterResponse
+
+    @GET("list.php?a=list")
+    suspend fun getArea(): AreaResponse
 }

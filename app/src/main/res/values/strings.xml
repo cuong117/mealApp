@@ -3,9 +3,13 @@
     <string name="item_home">Home</string>
     <string name="item_ingredient">Ingredient</string>
     <string name="item_favorite">Favorite</string>
-    <string name="hint_search_view">Search meal...</string>
+    <string name="hint_search_view">Search meal…</string>
     <string name="meal_image">meal image</string>
     <string name="image_right_arrow">image right arrow</string>
     <string name="nothing_to_show">Nothing to show</string>
-    <string name="hint_search_ingredient">Search ingredient...</string>
+    <string name="hint_search_ingredient">Search ingredient…</string>
+    <string name="hint_search">Search…</string>
+    <string name="title_remove">Remove</string>
+    <string name="msg_remove">You want remove \"%s\" ?</string>
+    <string name="no_result">No Result</string>
 </resources>

@@ -8,21 +8,16 @@
     android:paddingTop="@dimen/dp_20"
     android:paddingHorizontal="@dimen/dp_20">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_ingredient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_circle_horizontal"
-        app:queryHint="@string/hint_search_view"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@android:color/transparent"/>
+    <include
+        android:id="@+id/search_layout"
+        layout="@layout/search_layout"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_outer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_15"
-        android:layout_below="@id/search_ingredient"
+        android:layout_below="@id/search_layout"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_meal"
         tools:itemCount="1"/>
