@@ -19,6 +19,8 @@ interface Repository {
 
         suspend fun getCategories(): DataResult<CategoryResponse>
 
+        suspend fun getMealByCategory(name: String): DataResult<MealResponse>
+
         suspend fun getListMealRecent(): DataResult<List<MealCollapse>>
 
         suspend fun getListIngredient(): DataResult<IngredientResponse>

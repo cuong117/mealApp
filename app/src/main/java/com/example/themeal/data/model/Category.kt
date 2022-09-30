@@ -1,8 +1,11 @@
 package com.example.themeal.data.model
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Category(
     @SerializedName("idCategory")
     val id: String,
@@ -10,7 +13,7 @@ data class Category(
     val name: String,
     @SerializedName("strCategoryThumb")
     val thumbnailLink: String
-) {
+) : Parcelable {
     companion object {
 
         fun getDiffUtil() = object : DiffUtil.ItemCallback<Category>() {

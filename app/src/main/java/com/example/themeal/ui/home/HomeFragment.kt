@@ -6,13 +6,18 @@ import android.view.View
 import com.example.themeal.R
 import com.example.themeal.base.BaseFragment
 import com.example.themeal.constant.Constant
+import com.example.themeal.data.model.Category
 import com.example.themeal.data.model.HomeItem
+import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.FragmentHomeBinding
 import com.example.themeal.ui.home.adapter.HomeAdapter
+import com.example.themeal.ui.listmeal.ListMealActivity
 import com.example.themeal.ui.search.SearchActivity
+import com.example.themeal.util.OnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment :
+    BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate), OnClickListener<Any> {
 
     private val homeViewModel by viewModel<HomeViewModel>()
     private val homeAdapter by lazy { HomeAdapter() }
@@ -31,6 +36,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.searchLayout.textHint.text = getString(R.string.hint_search_view)
         addObserver()
         addListener()
+        homeAdapter.updateListener(this)
+    }
+
+    override fun onItemClick(data: Any) {
+        if (data is HomeItem) {
+            val intent = Intent(activity, ListMealActivity::class.java)
+            intent.putExtra(Constant.TITLE_TOOL_BAR, data.name)
+            val list = arrayListOf<MealCollapse>()
+            if (data.name != Constant.ALL_LIST) {
+                list.addAll(data.listItem.mapNotNull { it as? MealCollapse })
+            }
+            intent.putParcelableArrayListExtra(Constant.KEY_LIST_DATA, list)
+            startActivity(intent)
+        }
+    }
+
+    override fun onClick(data: Any) {
+        if (data is Category) {
+            val intent = Intent(activity, ListMealActivity::class.java)
+            intent.putExtra(Constant.KEY_CATEGORY_DATA, data.name)
+            startActivity(intent)
+        }
     }
 
     private fun addListener() {

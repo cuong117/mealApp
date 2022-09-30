@@ -18,7 +18,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun addListener() {
-
         binding.bottomNavView.setOnItemSelectedListener {
             binding.viewPager.currentItem = listFragmentId.indexOf(it.itemId)
             true

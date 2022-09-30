@@ -18,6 +18,8 @@ interface DataSource {
 
         suspend fun getCategories(): CategoryResponse
 
+        suspend fun getMealByCategory(name: String): MealResponse
+
         suspend fun getMealRecent(): List<MealCollapse>
 
         suspend fun getListIngredient(): IngredientResponse

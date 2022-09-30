@@ -26,7 +26,6 @@ data class Ingredient(
             override fun areContentsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

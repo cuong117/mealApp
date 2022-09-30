@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<T : ViewBinding>(private val inflate: Inflate<T>) : AppCompatActivity() {
+abstract class BaseActivity<T : ViewBinding>(private val inflate: Inflate<T>) :
+    AppCompatActivity() {
 
     private var _binding: T? = null
     val binding get() = _binding!!

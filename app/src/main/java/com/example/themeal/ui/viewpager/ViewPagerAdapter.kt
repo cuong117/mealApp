@@ -8,7 +8,7 @@ import com.example.themeal.ui.home.HomeFragment
 import com.example.themeal.ui.ingredient.IngredientFragment
 import org.koin.java.KoinJavaComponent.inject
 
-class ViewPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {
+class ViewPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
     private val listFragment = listOf(
         inject<HomeFragment>(HomeFragment::class.java).value,

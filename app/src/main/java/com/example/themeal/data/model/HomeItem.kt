@@ -16,7 +16,6 @@ data class HomeItem(
             override fun areContentsTheSame(oldItem: HomeItem, newItem: HomeItem): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

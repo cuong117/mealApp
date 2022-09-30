@@ -16,17 +16,17 @@ class SearchAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ViewHolder(ItemRecentSearchBinding.inflate(layoutInflater, parent, false), listener)
+        return ViewHolder(ItemRecentSearchBinding.inflate(layoutInflater, parent, false))
     }
 
     fun addClickListener(listener: OnClickListener<RecentSearch>) {
         this.listener = listener
     }
 
-    class ViewHolder(
-        binding: ItemRecentSearchBinding,
-        private val listener: OnClickListener<RecentSearch>?
-    ) : BaseViewHolder<RecentSearch, ItemRecentSearchBinding>(binding), View.OnClickListener,
+    inner class ViewHolder(
+        binding: ItemRecentSearchBinding
+    ) : BaseViewHolder<RecentSearch, ItemRecentSearchBinding>(binding),
+        View.OnClickListener,
         View.OnLongClickListener {
 
         private var data: RecentSearch? = null
