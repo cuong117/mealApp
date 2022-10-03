@@ -12,6 +12,6 @@ interface MealDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMeal(meal: MealCollapse)
 
-    @Query("select * from recent")
+    @Query("select * from " + MealDatabase.RECENT_TABLE)
     suspend fun getListRecentMeal(): List<MealCollapse>
 }

@@ -5,41 +5,42 @@ import androidx.lifecycle.MutableLiveData
 
 abstract class LoadMoreLocalVM<S> : BaseViewModel() {
 
-    private val totalList = MutableLiveData<List<S>>()
+    private val totalList = mutableListOf<S>()
 
-    private val _currentList = MutableLiveData<List<S>>(mutableListOf())
+    private val _currentList = MutableLiveData<List<S>>()
     val currentList: LiveData<List<S>> get() = _currentList
 
     private var currentIndex = 0
-    protected open val itemPerPage: Int = 0
+    protected abstract val itemPerPage: Int
 
     var isLoadMore = true
 
-    protected abstract fun getAllItem()
-
     protected fun submitList(list: List<S>) {
-        totalList.value = list
+        totalList.clear()
+        totalList.addAll(list)
+        currentIndex = 0
+        isLoadMore = list.isNotEmpty()
+        _currentList.value = mutableListOf()
         getNextItem()
     }
 
     fun getNextItem() {
-        if (totalList.value == null) {
-            getAllItem()
-        } else{
-            val allItem = totalList.value as List<S>
-            val currentListItem = _currentList.value as MutableList<S>
-            if (isLoadMore && currentIndex < allItem.size) {
+        if (totalList.isNotEmpty()) {
+            var currentListItem = _currentList.value as? MutableList<S>
+            if (currentListItem.isNullOrEmpty()) {
+                currentListItem = mutableListOf()
+            }
+            if (isLoadMore && currentIndex < totalList.size) {
                 val endIndex =
-                    if (currentIndex + itemPerPage >= allItem.size) {
-                        allItem.size
+                    if (currentIndex + itemPerPage >= totalList.size) {
+                        isLoadMore = false
+                        totalList.size
                     } else {
                         currentIndex + itemPerPage
                     }
-                currentListItem.addAll(allItem.slice(currentIndex until endIndex))
+                currentListItem.addAll(totalList.slice(currentIndex until endIndex))
                 currentIndex = endIndex
                 _currentList.value = currentListItem
-            } else {
-                isLoadMore = false
             }
         }
     }

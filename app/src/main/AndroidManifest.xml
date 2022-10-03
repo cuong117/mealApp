@@ -6,7 +6,7 @@
 
     <application
         android:name=".MealApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -28,6 +28,9 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.search.SearchActivity"
             android:screenOrientation="portrait"/>
     </application>
 

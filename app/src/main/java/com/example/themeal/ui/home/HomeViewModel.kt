@@ -28,6 +28,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
     private var currentLetter = START_LETTER
     private val newItem = NEW_LETTER
 
+
     init {
         getMealByFirstLetter()
         getCategories()
@@ -65,7 +66,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         )
     }
 
-    private fun getListMealRecent() {
+    fun getListMealRecent() {
         launchAsync(
             request = { mealRepository.getListMealRecent() },
             onSuccess = {

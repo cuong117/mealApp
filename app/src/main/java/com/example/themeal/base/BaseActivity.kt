@@ -16,7 +16,7 @@ abstract class BaseActivity<T : ViewBinding>(private val inflate: Inflate<T>) : 
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         _binding = null
+        super.onDestroy()
     }
 }
