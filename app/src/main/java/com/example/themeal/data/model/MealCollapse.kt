@@ -1,11 +1,13 @@
 package com.example.themeal.data.model
 
-import android.util.Log
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.themeal.data.source.database.MealDatabase
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = MealDatabase.RECENT_TABLE)
 data class MealCollapse(
     @PrimaryKey
@@ -19,7 +21,7 @@ data class MealCollapse(
     val instructionVideo: String?,
     val ingredient: List<String?>?,
     val measure: List<String?>?
-) {
+) : Parcelable {
 
     fun getLinkPreview() = "$thumbnailLink/preview"
 

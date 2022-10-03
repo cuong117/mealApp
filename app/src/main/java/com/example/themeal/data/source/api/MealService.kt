@@ -2,7 +2,6 @@ package com.example.themeal.data.source.api
 
 import com.example.themeal.data.model.AreaResponse
 import com.example.themeal.data.model.CategoryResponse
-import com.example.themeal.data.model.FilterResponse
 import com.example.themeal.data.model.IngredientResponse
 import com.example.themeal.data.model.MealResponse
 import retrofit2.http.GET
@@ -26,7 +25,10 @@ interface MealService {
     suspend fun getListIngredient(): IngredientResponse
 
     @GET("filter.php")
-    suspend fun filterByIngredient(): FilterResponse
+    suspend fun filterByIngredient(): MealResponse
+
+    @GET("filter.php")
+    suspend fun getMealByCategory(@Query("c") name: String): MealResponse
 
     @GET("list.php?a=list")
     suspend fun getArea(): AreaResponse

@@ -29,6 +29,10 @@ class MealDataSource(
         return apiService.getCategory()
     }
 
+    override suspend fun getMealByCategory(name: String): MealResponse {
+        return apiService.getMealByCategory(name)
+    }
+
     override suspend fun getMealRecent(): List<MealCollapse> {
         return mealDAO.getListRecentMeal()
     }

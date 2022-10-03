@@ -13,7 +13,7 @@ interface FilterInterface {
         return originalList.filter { meal ->
             var isChoose = true
             area?.let { isChoose = meal.area == it }
-            ingredient?.let { isChoose = meal.ingredient?.contains(it) ?: false && isChoose  }
+            ingredient?.let { isChoose = meal.ingredient?.contains(it) ?: false && isChoose }
             category?.let { isChoose = meal.category == it && isChoose }
             isChoose
         }

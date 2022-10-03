@@ -1,7 +1,6 @@
 package com.example.themeal.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -17,7 +16,8 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchResultFragment :
-    BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::inflate), RecyclerViewLoadMore {
+    BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::inflate),
+    RecyclerViewLoadMore {
 
     private val viewModel by sharedViewModel<SearchResultViewModel>()
     private val homeViewModel by viewModel<HomeViewModel>()
