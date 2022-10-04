@@ -25,7 +25,31 @@ data class MealCollapse(
 
     fun getLinkPreview() = "$thumbnailLink/preview"
 
+    fun getIngredientMeasure(): List<Pair<String, String>> {
+        val list = mutableListOf<Pair<String, String>>()
+        val length = ingredient?.size ?: 0
+        for (i in 0 until length) {
+            ingredient?.get(i)?.let {
+                if (it.isNotBlank()) {
+                    list.add(it to (measure?.get(i) ?: ""))
+                }
+            }
+        }
+        list.sortBy { it.first }
+        return list
+    }
+
+    fun getVideoId(): String {
+        var result = ""
+        instructionVideo?.let {
+            result = it.substringAfter(DELIMITER)
+        }
+        return result
+    }
+
     companion object {
+
+        private const val DELIMITER = "="
 
         fun getDiffUtil() = object : DiffUtil.ItemCallback<MealCollapse>() {
             override fun areItemsTheSame(oldItem: MealCollapse, newItem: MealCollapse): Boolean {

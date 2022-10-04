@@ -12,7 +12,8 @@ import com.example.themeal.util.RecyclerViewLoadMore
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListMealActivity :
-    BaseActivity<ActivityListMealBinding>(ActivityListMealBinding::inflate), OnClickListener<Any>,
+    BaseActivity<ActivityListMealBinding>(ActivityListMealBinding::inflate),
+    OnClickListener<Any>,
     RecyclerViewLoadMore {
 
     private val adapter by lazy { ListMealAdapter() }

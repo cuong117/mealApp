@@ -1,4 +1,4 @@
-package com.example.themeal.ui.search
+package com.example.themeal.ui.search.searchmeal
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

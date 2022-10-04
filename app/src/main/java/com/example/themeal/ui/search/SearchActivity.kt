@@ -3,8 +3,13 @@ package com.example.themeal.ui.search
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import com.example.themeal.base.BaseActivity
+import com.example.themeal.constant.Constant
 import com.example.themeal.data.model.RecentSearch
 import com.example.themeal.databinding.ActivitySearchBinding
+import com.example.themeal.ui.ingredient.IngredientViewModel
+import com.example.themeal.ui.search.searchIngredient.IngredientResultFragment
+import com.example.themeal.ui.search.searchmeal.SearchResultFragment
+import com.example.themeal.ui.search.searchmeal.SearchResultViewModel
 import com.example.themeal.util.addFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -12,15 +17,41 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding
 
     private val searchViewModel by viewModel<SearchViewModel>()
     private val resultViewModel by viewModel<SearchResultViewModel>()
+    private val ingredientViewModel by viewModel<IngredientViewModel>()
+    private var actionSubmit: ((String) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         searchViewModel.getAllKeyWord()
         binding.search.onActionViewExpanded()
+        initData()
         addFragment(binding.layoutContainer.id, SearchFragment.newInstance { text, isSubmit ->
             binding.search.setQuery(text, isSubmit)
         }, false)
         addListener()
+    }
+
+    private fun initData() {
+        when (intent.getIntExtra(Constant.KEY_SEARCH_TYPE, -1)) {
+            Constant.MEAL_TYPE -> actionSubmit = { text ->
+                resultViewModel.searchMeal(text)
+                addFragment(
+                    binding.layoutContainer.id,
+                    SearchResultFragment.newInstance(),
+                    false
+                )
+            }
+            Constant.INGREDIENT_TYPE -> actionSubmit = { text ->
+                ingredientViewModel.listIngredient.observe(this) {
+                    ingredientViewModel.searchIngredient(text)
+                }
+                addFragment(
+                    binding.layoutContainer.id,
+                    IngredientResultFragment.newInstance(),
+                    false
+                )
+            }
+        }
     }
 
     private fun addListener() {
@@ -42,13 +73,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     if (it.isNotBlank()) {
-                        resultViewModel.searchMeal(it)
+                        actionSubmit?.invoke(it)
                         supportFragmentManager.popBackStack()
-                        addFragment(
-                            binding.layoutContainer.id,
-                            SearchResultFragment.newInstance(),
-                            false
-                        )
                         searchViewModel.insertKeyWord(RecentSearch(it))
                         binding.search.clearFocus()
                     }

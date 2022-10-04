@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ReadMoreTextView">
+        <attr name="show_line" format="integer" />
+        <attr name="hide_text" format="string" />
+        <attr name="show_text" format="string" />
+    </declare-styleable>
+</resources>

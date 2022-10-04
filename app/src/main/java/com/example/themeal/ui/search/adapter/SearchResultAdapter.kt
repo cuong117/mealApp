@@ -64,7 +64,6 @@ class SearchResultAdapter :
         override fun onBindData(data: MealCollapse) {
             // No-ip
         }
-
     }
 
     companion object {
