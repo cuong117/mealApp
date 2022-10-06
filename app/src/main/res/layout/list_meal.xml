@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_title"
+        android:overScrollMode="never"
         android:layout_marginTop="@dimen/dp_20"
         android:paddingEnd="@dimen/dp_20"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

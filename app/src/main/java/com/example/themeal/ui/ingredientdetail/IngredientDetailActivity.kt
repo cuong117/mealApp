@@ -2,6 +2,7 @@ package com.example.themeal.ui.ingredientdetail
 
 import android.os.Bundle
 import android.widget.Toast
+import com.example.themeal.R
 import com.example.themeal.base.BaseActivity
 import com.example.themeal.constant.Constant
 import com.example.themeal.data.model.Ingredient
@@ -21,6 +22,13 @@ class IngredientDetailActivity :
             onBackPressed()
         }
         initData()
+        viewModel.isShowLoading.observe(this) {
+            if (it) {
+                loadingDialog.showLoadingDialog()
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
     }
 
     private fun initData() {
@@ -33,7 +41,12 @@ class IngredientDetailActivity :
                     ingredient = viewModel.findIngredient(name)
                     updateDataView(ingredient)
                     if (ingredient == null) {
-                        Toast.makeText(this, "Không tìm thấy nguyên liệu", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.notification_not_found),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        onBackPressed()
                     }
                 }
             }

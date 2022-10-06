@@ -23,7 +23,7 @@ class IngredientViewModel(
         getAllItem()
     }
 
-    private fun getAllItem() {
+    fun getAllItem() {
         launchAsync(
             request = { mealRepository.getListIngredient() },
             onSuccess = {

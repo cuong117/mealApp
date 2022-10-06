@@ -1,5 +1,6 @@
 package com.example.themeal.ui.listmeal
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
 import com.example.themeal.base.BaseActivity
@@ -7,13 +8,14 @@ import com.example.themeal.constant.Constant
 import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.ActivityListMealBinding
 import com.example.themeal.ui.listmeal.adapter.ListMealAdapter
+import com.example.themeal.ui.mealdetail.MealDetailActivity
 import com.example.themeal.util.OnClickListener
 import com.example.themeal.util.RecyclerViewLoadMore
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListMealActivity :
     BaseActivity<ActivityListMealBinding>(ActivityListMealBinding::inflate),
-    OnClickListener<Any>,
+    OnClickListener<MealCollapse>,
     RecyclerViewLoadMore {
 
     private val adapter by lazy { ListMealAdapter() }
@@ -49,6 +51,7 @@ class ListMealActivity :
         supportActionBar?.title = title
         binding.recyclerListMeal.adapter = adapter
         adapter.submitList(list)
+        adapter.updateListener(this)
         addListener()
     }
 
@@ -62,6 +65,13 @@ class ListMealActivity :
 
     override fun isLoadMore() =
         if (isLoadMoreOnline) viewModel.isAllMealLoadMore else viewModel.isLoadMore
+
+    override fun onClick(data: MealCollapse) {
+        val intent = Intent(this, MealDetailActivity::class.java)
+        intent.putExtra(Constant.KEY_MEAL, data)
+        intent.putExtra(Constant.KEY_LOSS_DATA, true)
+        startActivity(intent)
+    }
 
     private fun hideElement(isVisible: Boolean) {
         binding.recyclerListMeal.isVisible = isVisible.not()

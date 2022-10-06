@@ -10,7 +10,7 @@ import org.koin.java.KoinJavaComponent.inject
 
 class ViewPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
-    private val listFragment = listOf(
+    private val listFragment = listOf<Fragment>(
         inject<HomeFragment>(HomeFragment::class.java).value,
         inject<IngredientFragment>(IngredientFragment::class.java).value,
         inject<FavoriteFragment>(FavoriteFragment::class.java).value

@@ -25,9 +25,6 @@ interface MealService {
     suspend fun getListIngredient(): IngredientResponse
 
     @GET("filter.php")
-    suspend fun filterByIngredient(): MealResponse
-
-    @GET("filter.php")
     suspend fun getMealByCategory(@Query("c") name: String): MealResponse
 
     @GET("list.php?a=list")

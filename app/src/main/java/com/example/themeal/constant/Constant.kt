@@ -1,6 +1,7 @@
 package com.example.themeal.constant
 
 object Constant {
+    const val KEY_LOSS_DATA = "lossData"
     const val ONE_SECOND = 1000L
     const val ROOM_VERSION = 1
     const val CATEGORY_LIST = ""
@@ -15,9 +16,9 @@ object Constant {
     const val KEY_CATEGORY_DATA = "categoryName"
     const val KEY_SEARCH_TYPE = "searchType"
     const val KEY_INGREDIENT_NAME = "ingredientName"
-    const val MEAL_TYPE = 0
+    const val DATA_TYPE = 0
     const val INGREDIENT_TYPE = 1
-    const val RECENT_TYPE = 0
-    const val NEW_TYPE = 1
-    const val ALL_TYPE = 2
+    const val FAVORITE_TYPE = 2
+    const val LOAD_MORE = 0
+    const val ITEM_DATA = 1
 }

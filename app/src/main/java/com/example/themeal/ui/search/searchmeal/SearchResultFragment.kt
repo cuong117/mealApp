@@ -1,5 +1,6 @@
 package com.example.themeal.ui.search.searchmeal
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -7,31 +8,41 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.core.view.isVisible
 import com.example.themeal.base.BaseFragment
+import com.example.themeal.constant.Constant
+import com.example.themeal.data.model.FavoriteMeal
+import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.FragmentSearchResultBinding
+import com.example.themeal.ui.favorite.FavoriteViewModel
 import com.example.themeal.ui.home.HomeViewModel
 import com.example.themeal.ui.ingredient.IngredientViewModel
+import com.example.themeal.ui.mealdetail.MealDetailActivity
 import com.example.themeal.ui.search.adapter.SearchResultAdapter
+import com.example.themeal.util.OnClickListener
 import com.example.themeal.util.RecyclerViewLoadMore
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchResultFragment :
     BaseFragment<FragmentSearchResultBinding>(FragmentSearchResultBinding::inflate),
-    RecyclerViewLoadMore {
+    RecyclerViewLoadMore, OnClickListener<MealCollapse> {
 
     private val viewModel by sharedViewModel<SearchResultViewModel>()
     private val homeViewModel by viewModel<HomeViewModel>()
     private val ingredientViewModel by viewModel<IngredientViewModel>()
+    private val favoriteViewModel by viewModel<FavoriteViewModel>()
+    private var listFavorite = mutableListOf<FavoriteMeal>()
+    private var listMealResult = mutableListOf<MealCollapse>()
     private val adapter by lazy { SearchResultAdapter() }
-    private var isInit = true
+    private var isInitMeal = false
+    private var isInitFavorite = false
     private var category: String? = null
     private var area: String? = null
     private var ingredient: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerSearchResult.adapter = adapter
         viewModel.getArea()
+        binding.recyclerSearchResult.adapter = adapter
         hideElement(true)
         addObserver()
         startLoadMore(binding.recyclerSearchResult)
@@ -47,6 +58,13 @@ class SearchResultFragment :
             category = it
             viewModel.mealFilter(area, ingredient, category)
         }
+        adapter.updateListener(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        isInitMeal = false
+        favoriteViewModel.getAllFavoriteMeal()
     }
 
     override fun loadMore() {
@@ -55,15 +73,39 @@ class SearchResultFragment :
 
     override fun isLoadMore() = viewModel.isLoadMore
 
+    override fun onClick(data: MealCollapse) {
+        val intent = Intent(activity, MealDetailActivity::class.java)
+        intent.putExtra(Constant.KEY_MEAL, data)
+        startActivity(intent)
+    }
+
+    override fun onItemClick(data: MealCollapse) {
+        val favorite = listFavorite.find { it.mealId == data.id }
+        if (favorite == null) {
+            favoriteViewModel.insertNewFavorite(FavoriteMeal(data.id))
+        } else {
+            favoriteViewModel.deleteFavorite(favorite)
+        }
+    }
+
     private fun addObserver() {
+        viewModel.isShowLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                loadingDialog?.showLoadingDialog()
+            } else {
+                loadingDialog?.dismiss()
+            }
+        }
         viewModel.currentList.observe(viewLifecycleOwner) {
             hideElement(it.isEmpty())
-            if (isInit) {
-                adapter.submitList(it.toMutableList())
-                isInit = false
-            } else {
-                adapter.submitList(it.toMutableList(), viewModel.isLoadMore)
+            listMealResult = it.toMutableList()
+            if (isInitMeal.not() && isInitFavorite) {
+                adapter.submitList(listMealResult, false)
+                isInitMeal = true
+            } else if (isInitFavorite) {
+                adapter.submitList(listMealResult, viewModel.isLoadMore)
             }
+
         }
 
         homeViewModel.categoryList.observe(viewLifecycleOwner) {
@@ -82,6 +124,13 @@ class SearchResultFragment :
             val list = mutableListOf(AREA)
             list.addAll(it.map { area -> area.name })
             initSpinner(binding.spinnerArea, list)
+        }
+
+        favoriteViewModel.listFavorite.observe(viewLifecycleOwner) {
+            listFavorite = it.toMutableList()
+            isInitFavorite = true
+            adapter.updateListFavorite(it.map { meal -> meal.mealId })
+            adapter.submitList(listMealResult, false)
         }
     }
 

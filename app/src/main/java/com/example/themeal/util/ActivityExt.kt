@@ -10,7 +10,7 @@ fun AppCompatActivity.addFragment(
 ) {
     supportFragmentManager.beginTransaction().apply {
         add(containerId, fragment)
-        if (isAddBackStack){
+        if (isAddBackStack) {
             addToBackStack(null)
         }
         commit()

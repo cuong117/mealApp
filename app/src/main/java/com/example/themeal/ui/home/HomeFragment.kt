@@ -40,6 +40,11 @@ class HomeFragment :
         homeAdapter.updateListener(this)
     }
 
+    override fun onStart() {
+        super.onStart()
+        homeViewModel.getListMealRecent()
+    }
+
     override fun onItemClick(data: Any) {
         if (data is HomeItem) {
             val intent = Intent(activity, ListMealActivity::class.java)
@@ -68,7 +73,7 @@ class HomeFragment :
     private fun addListener() {
         binding.searchLayout.searchContainer.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
-            intent.putExtra(Constant.KEY_SEARCH_TYPE, Constant.MEAL_TYPE)
+            intent.putExtra(Constant.KEY_SEARCH_TYPE, Constant.DATA_TYPE)
             startActivity(intent)
         }
     }
@@ -89,6 +94,13 @@ class HomeFragment :
 
             recentMealList.observe(viewLifecycleOwner) {
                 submitNewList(Constant.RECENT_LIST, it)
+            }
+            isShowLoading.observe(viewLifecycleOwner) {
+                if (it) {
+                    loadingDialog?.showLoadingDialog()
+                } else {
+                    loadingDialog?.dismiss()
+                }
             }
         }
     }

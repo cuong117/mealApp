@@ -8,6 +8,7 @@
     <string name="image_right_arrow">image right arrow</string>
     <string name="nothing_to_show">Nothing to show</string>
     <string name="hint_search_ingredient">Search ingredient…</string>
+    <string name="hint_search_favorite">Search favorite meal…</string>
     <string name="hint_search">Search…</string>
     <string name="title_remove">Remove</string>
     <string name="msg_remove">You want remove \"%s\" ?</string>
@@ -19,4 +20,7 @@
     <string name="area">Area: %s</string>
     <string name="read_more">read more</string>
     <string name="hide">hide</string>
+    <string name="notification_not_found">Not found ingredient</string>
+    <string name="title_disconnect_network">No Internet</string>
+    <string name="msg_disconnect_network">Check your internet connection</string>
 </resources>
