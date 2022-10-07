@@ -12,4 +12,11 @@
     <string name="title_remove">Remove</string>
     <string name="msg_remove">You want remove \"%s\" ?</string>
     <string name="no_result">No Result</string>
+    <string name="description">Description: </string>
+    <string name="ingredient">Ingredient:</string>
+    <string name="instructions">Instructions:</string>
+    <string name="tags">Tags: %s</string>
+    <string name="area">Area: %s</string>
+    <string name="read_more">read more</string>
+    <string name="hide">hide</string>
 </resources>

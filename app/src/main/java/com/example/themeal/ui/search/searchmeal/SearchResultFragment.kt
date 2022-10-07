@@ -1,4 +1,4 @@
-package com.example.themeal.ui.search
+package com.example.themeal.ui.search.searchmeal
 
 import android.os.Bundle
 import android.view.View
@@ -47,7 +47,6 @@ class SearchResultFragment :
             category = it
             viewModel.mealFilter(area, ingredient, category)
         }
-
     }
 
     override fun loadMore() {
@@ -75,7 +74,7 @@ class SearchResultFragment :
 
         ingredientViewModel.listIngredient.observe(viewLifecycleOwner) {
             val list = mutableListOf(INGREDIENT)
-            list.addAll(it.map { ingredient -> ingredient.name })
+            list.addAll(it.map { ingredient -> ingredient.name ?: "" })
             initSpinner(binding.spinnerIngredient, list)
         }
 

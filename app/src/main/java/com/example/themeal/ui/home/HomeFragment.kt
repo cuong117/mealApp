@@ -12,6 +12,7 @@ import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.FragmentHomeBinding
 import com.example.themeal.ui.home.adapter.HomeAdapter
 import com.example.themeal.ui.listmeal.ListMealActivity
+import com.example.themeal.ui.mealdetail.MealDetailActivity
 import com.example.themeal.ui.search.SearchActivity
 import com.example.themeal.util.OnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,12 +58,18 @@ class HomeFragment :
             val intent = Intent(activity, ListMealActivity::class.java)
             intent.putExtra(Constant.KEY_CATEGORY_DATA, data.name)
             startActivity(intent)
+        } else if (data is MealCollapse) {
+            val intent = Intent(activity, MealDetailActivity::class.java)
+            intent.putExtra(Constant.KEY_MEAL, data)
+            startActivity(intent)
         }
     }
 
     private fun addListener() {
         binding.searchLayout.searchContainer.setOnClickListener {
-            startActivity(Intent(activity, SearchActivity::class.java))
+            val intent = Intent(activity, SearchActivity::class.java)
+            intent.putExtra(Constant.KEY_SEARCH_TYPE, Constant.MEAL_TYPE)
+            startActivity(intent)
         }
     }
 

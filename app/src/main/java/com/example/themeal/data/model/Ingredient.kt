@@ -1,16 +1,19 @@
 package com.example.themeal.data.model
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Ingredient(
     @SerializedName("idIngredient")
-    val id: String,
+    val id: String?,
     @SerializedName("strIngredient")
-    val name: String,
+    val name: String?,
     @SerializedName("strDescription")
-    val description: String
-) {
+    val description: String?
+) : Parcelable {
     fun getSmallThumbnail() = "$urlImage$name-Small.png"
 
     fun getThumbnail() = "$urlImage$name.png"

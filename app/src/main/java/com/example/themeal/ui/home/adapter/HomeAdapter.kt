@@ -66,6 +66,7 @@ class HomeAdapter :
                 val listMeal = data.listItem.mapNotNull { it as? MealCollapse }
                 val mealAdapter = MealAdapter()
                 mealAdapter.submitList(listMeal)
+                mealAdapter.updateListener(listener)
                 binding.recyclerMeal.adapter = mealAdapter
                 setStateView(true, data.name)
             }

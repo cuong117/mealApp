@@ -28,14 +28,23 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.search.SearchActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.listmeal.ListMealActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.listmeal.ListMealActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ingredientdetail.IngredientDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mealdetail.MealDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

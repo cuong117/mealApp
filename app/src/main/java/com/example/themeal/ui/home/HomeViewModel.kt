@@ -28,7 +28,6 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
     private var currentLetter = START_LETTER
     private val newItem = NEW_LETTER
 
-
     init {
         getMealByFirstLetter()
         getCategories()

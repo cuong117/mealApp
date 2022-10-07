@@ -13,6 +13,9 @@ class IngredientViewModel(
     private val _listIngredient = MutableLiveData<List<Ingredient>>()
     val listIngredient: LiveData<List<Ingredient>> get() = _listIngredient
 
+    private val _listIngredientResult = MutableLiveData<List<Ingredient>>()
+    val listIngredientResult: LiveData<List<Ingredient>> get() = _listIngredientResult
+
     override val itemPerPage: Int
         get() = COUNT_ITEM
 
@@ -20,7 +23,7 @@ class IngredientViewModel(
         getAllItem()
     }
 
-    fun getAllItem() {
+    private fun getAllItem() {
         launchAsync(
             request = { mealRepository.getListIngredient() },
             onSuccess = {
@@ -30,6 +33,19 @@ class IngredientViewModel(
                 }
             }
         )
+    }
+
+    fun findIngredient(name: String): Ingredient? {
+        val list = _listIngredient.value as? MutableList<Ingredient>
+        return list?.find { it.name == name }
+    }
+
+    fun searchIngredient(text: String) {
+        val list = _listIngredient.value as? MutableList<Ingredient>
+        val resultList = list?.filter { it.name?.contains(text) == true }
+        resultList?.let {
+            _listIngredientResult.value = it
+        }
     }
 
     companion object {
