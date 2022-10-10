@@ -28,11 +28,23 @@ class IngredientFragment :
         viewModel.currentList.observe(viewLifecycleOwner) {
             adapter.submitList(it.toMutableList())
         }
+        viewModel.isShowLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                loadingDialog?.showLoadingDialog()
+            } else {
+                loadingDialog?.dismiss()
+            }
+        }
         binding.recyclerIngredient.adapter = adapter
         binding.searchLayout.textHint.text = getString(R.string.hint_search_ingredient)
         startLoadMore(binding.recyclerIngredient)
         adapter.updateListener(this)
         addListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAllItem()
     }
 
     override fun loadMore() {

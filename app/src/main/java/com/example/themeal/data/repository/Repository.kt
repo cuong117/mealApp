@@ -2,6 +2,7 @@ package com.example.themeal.data.repository
 
 import com.example.themeal.data.model.AreaResponse
 import com.example.themeal.data.model.CategoryResponse
+import com.example.themeal.data.model.FavoriteMeal
 import com.example.themeal.data.model.IngredientResponse
 import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.data.model.MealResponse
@@ -24,6 +25,10 @@ interface Repository {
         suspend fun getListMealRecent(): DataResult<List<MealCollapse>>
 
         suspend fun getListIngredient(): DataResult<IngredientResponse>
+
+        suspend fun getMealById(id: String): DataResult<MealResponse>
+
+        suspend fun insertMealRecent(meal: MealCollapse): DataResult<Unit>
     }
 
     interface RecentSearchRepository {
@@ -32,5 +37,14 @@ interface Repository {
         suspend fun addNewKeyWord(recentSearch: RecentSearch): DataResult<Unit>
 
         suspend fun deleteKeyWord(recentSearch: RecentSearch): DataResult<Unit>
+    }
+
+    interface FavoriteMealRepository {
+
+        suspend fun getFavoriteMealId(): DataResult<List<FavoriteMeal>>
+
+        suspend fun insertFavoriteMeal(meal: FavoriteMeal): DataResult<Unit>
+
+        suspend fun deleteFavoriteMeal(meal: FavoriteMeal): DataResult<Unit>
     }
 }

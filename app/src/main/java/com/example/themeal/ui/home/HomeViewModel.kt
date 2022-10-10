@@ -32,7 +32,6 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         getMealByFirstLetter()
         getCategories()
         getNewMeal()
-        getListMealRecent()
     }
 
     private fun getMealByFirstLetter() {
@@ -69,7 +68,7 @@ class HomeViewModel(private val mealRepository: Repository.MealRepository) : Bas
         launchAsync(
             request = { mealRepository.getListMealRecent() },
             onSuccess = {
-                _recentMealList.value = it
+                _recentMealList.value = it.reversed()
             }
         )
     }

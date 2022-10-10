@@ -40,4 +40,12 @@ class MealDataSource(
     override suspend fun getListIngredient(): IngredientResponse {
         return apiService.getListIngredient()
     }
+
+    override suspend fun getMealById(id: String): MealResponse {
+        return apiService.getMealDetail(id)
+    }
+
+    override suspend fun insertRecentMeal(mealCollapse: MealCollapse) {
+        mealDAO.insertMeal(mealCollapse)
+    }
 }

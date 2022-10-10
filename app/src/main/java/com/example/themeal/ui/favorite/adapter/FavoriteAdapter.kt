@@ -1,19 +1,19 @@
-package com.example.themeal.ui.ingredient.adapter
+package com.example.themeal.ui.favorite.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.themeal.base.BaseAdapter
 import com.example.themeal.base.BaseViewHolder
-import com.example.themeal.data.model.Ingredient
+import com.example.themeal.data.model.MealCollapse
 import com.example.themeal.databinding.ItemCircleCornerBinding
 import com.example.themeal.util.OnClickListener
 import com.example.themeal.util.loadImage
 
-class IngredientAdapter :
-    BaseAdapter<Ingredient, ItemCircleCornerBinding, IngredientAdapter.ViewHolder>(Ingredient.getDiffUtil()) {
+class FavoriteAdapter :
+    BaseAdapter<MealCollapse, ItemCircleCornerBinding, FavoriteAdapter.ViewHolder>(MealCollapse.getDiffUtil()) {
 
-    private var listener: OnClickListener<Ingredient>? = null
+    private var listener: OnClickListener<MealCollapse>? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,23 +23,23 @@ class IngredientAdapter :
         return ViewHolder(ItemCircleCornerBinding.inflate(layoutInflater, parent, false))
     }
 
-    fun updateListener(listener: OnClickListener<Ingredient>) {
+    fun updateListener(listener: OnClickListener<MealCollapse>) {
         this.listener = listener
     }
 
     inner class ViewHolder(
         binding: ItemCircleCornerBinding
-    ) : BaseViewHolder<Ingredient, ItemCircleCornerBinding>(binding), View.OnClickListener {
+    ) : BaseViewHolder<MealCollapse, ItemCircleCornerBinding>(binding), View.OnClickListener {
 
-        private var data: Ingredient? = null
+        private var data: MealCollapse? = null
 
         init {
             binding.root.setOnClickListener(this)
         }
 
-        override fun onBindData(data: Ingredient) {
+        override fun onBindData(data: MealCollapse) {
             this.data = data
-            binding.image.loadImage(binding.root.context, data.getThumbnail())
+            binding.image.loadImage(binding.root.context, data.getLinkPreview())
             binding.textName.text = data.name
         }
 

@@ -7,6 +7,7 @@ import com.example.themeal.constant.Constant
 import com.example.themeal.data.model.RecentSearch
 import com.example.themeal.databinding.ActivitySearchBinding
 import com.example.themeal.ui.ingredient.IngredientViewModel
+import com.example.themeal.ui.search.searchFavorite.SearchFavoriteFragment
 import com.example.themeal.ui.search.searchIngredient.IngredientResultFragment
 import com.example.themeal.ui.search.searchmeal.SearchResultFragment
 import com.example.themeal.ui.search.searchmeal.SearchResultViewModel
@@ -25,15 +26,19 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding
         searchViewModel.getAllKeyWord()
         binding.search.onActionViewExpanded()
         initData()
-        addFragment(binding.layoutContainer.id, SearchFragment.newInstance { text, isSubmit ->
-            binding.search.setQuery(text, isSubmit)
-        }, false)
+        addFragment(
+            binding.layoutContainer.id,
+            SearchFragment.newInstance { text, isSubmit ->
+                binding.search.setQuery(text, isSubmit)
+            },
+            false
+        )
         addListener()
     }
 
     private fun initData() {
         when (intent.getIntExtra(Constant.KEY_SEARCH_TYPE, -1)) {
-            Constant.MEAL_TYPE -> actionSubmit = { text ->
+            Constant.DATA_TYPE -> actionSubmit = { text ->
                 resultViewModel.searchMeal(text)
                 addFragment(
                     binding.layoutContainer.id,
@@ -48,6 +53,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding
                 addFragment(
                     binding.layoutContainer.id,
                     IngredientResultFragment.newInstance(),
+                    false
+                )
+            }
+            Constant.FAVORITE_TYPE -> actionSubmit = { text ->
+                addFragment(
+                    binding.layoutContainer.id,
+                    SearchFavoriteFragment.newInstance(text),
                     false
                 )
             }
@@ -92,7 +104,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding
                 }
                 return true
             }
-
         })
 
         binding.imageBack.setOnClickListener {
